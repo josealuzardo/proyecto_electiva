@@ -1,0 +1,420 @@
+/* ============================================== */
+/* Archivo: styles.css (Estilos CSS3 Completos)   */
+/* Diseño: Moderno, Limpio y Mobile-First         */
+/* ============================================== */
+
+/* Variables CSS para consistencia de color */
+:root {
+    --color-primario: #007bff; /* Azul vibrante (agua/cielo) */
+    --color-secundario: #28a745; /* Verde (naturaleza) */
+    --color-fondo: #f4f7f6;
+    --color-texto: #333;
+    --color-sombra: rgba(0, 0, 0, 0.1);
+}
+
+/* Base Mobile-First */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+/* === Estilos de Encabezado y Navegación === */
+
+.main-header {
+    background-color: white;
+    box-shadow: 0 2px 4px var(--color-sombra);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--color-primario);
+}
+
+.main-nav {
+    display: none; /* Oculto en móvil */
+}
+
+.cart-icon {
+    position: relative;
+    font-size: 1.5em;
+    color: var(--color-secundario);
+    cursor: pointer;
+}
+
+#contador-carrito {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #dc3545; /* Rojo para alertar */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7em;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* === Estilos de Hero/Banner === */
+
+.hero {
+    /* Nota: 'placeholder-venezuela.jpg' debe existir en tu proyecto */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('placeholder-venezuela.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.btn-cta {
+    display: inline-block;
+    background-color: var(--color-secundario);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.btn-cta:hover {
+    background-color: #1e7e34;
+}
+
+/* === Estilos de Paquetes Turísticos (Tarjetas) === */
+
+#paquetes h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--color-primario);
+}
+
+.paquetes-container {
+    display: flex;
+    flex-direction: column; /* Apilado en móvil */
+    gap: 20px;
+    padding: 0 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tour-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--color-sombra);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.tour-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.tour-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.tour-card h3 {
+    padding: 10px 15px 5px;
+    color: var(--color-primario);
+}
+
+.tour-precio {
+    padding: 0 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #dc3545;
+    margin-bottom: 10px;
+}
+
+.tour-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #eee;
+}
+
+/* Estilos de Botones Generales */
+.btn-reservar, .btn-detalles, .btn-finalizar {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 0.9em;
+}
+
+.btn-reservar, #modal-btn-reservar {
+    background-color: var(--color-secundario);
+    color: white;
+}
+
+.btn-reservar:hover, #modal-btn-reservar:hover {
+    background-color: #1e7e34;
+}
+
+.btn-detalles {
+    background-color: var(--color-primario);
+    color: white;
+}
+
+.btn-detalles:hover {
+    background-color: #0056b3;
+}
+
+.btn-finalizar {
+    width: 100%;
+    margin-top: 20px;
+    background-color: var(--color-primario);
+    color: white;
+    padding: 12px;
+}
+
+/* === Panel Lateral del Carrito === */
+
+.carrito-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%); /* Oculto por defecto */
+    transition: transform 0.3s ease-in-out;
+    padding: 20px;
+    z-index: 200;
+}
+
+.carrito-panel.active {
+    transform: translateX(0); /* Visible */
+}
+
+.cerrar-carrito {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: #666;
+}
+
+.lista-items-carrito {
+    list-style: none;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.carrito-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.carrito-total {
+    margin-top: 15px;
+    font-size: 1.1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* === Modal de Detalles === */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+/* === Estilos para la Sección de Historial de Pedidos === */
+
+.historial-pedidos {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+.historial-pedidos h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--color-secundario);
+}
+
+.pedidos-lista {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--color-sombra);
+    overflow: hidden;
+}
+
+.pedido-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9em;
+}
+
+.pedido-item:last-child {
+    border-bottom: none;
+}
+
+.pedido-header {
+    font-weight: bold;
+    background-color: #f8f8f8;
+}
+
+.pedido-id {
+    width: 10%;
+    color: var(--color-primario);
+}
+.pedido-monto {
+    width: 25%;
+    text-align: right;
+    font-weight: bold;
+    color: #dc3545;
+}
+.pedido-cantidad {
+    width: 25%;
+    text-align: center;
+}
+.pedido-fecha {
+    width: 40%;
+    text-align: right;
+    color: #666;
+}
+
+/* === Pie de Página === */
+
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #333;
+    color: white;
+}
+
+/* === Media Queries para Desktop (Responsividad) === */
+
+@media (min-width: 768px) {
+    /* Estilos para Tablets y Desktop */
+    
+    .hero {
+        padding: 100px 40px;
+    }
+
+    .hero h1 {
+        font-size: 3em;
+    }
+
+    .main-nav {
+        display: flex;
+        gap: 20px;
+    }
+    
+    .main-nav a {
+        text-decoration: none;
+        color: var(--color-texto);
+        padding: 5px 10px;
+        transition: color 0.3s;
+    }
+
+    .main-nav a:hover {
+        color: var(--color-primario);
+    }
+
+    .paquetes-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas en desktop */
+    }
+
+    .carrito-panel {
+        width: 350px;
+    }
+
+    /* Responsividad para la tabla de pedidos */
+    .pedido-item {
+        flex-wrap: nowrap; /* Evita que se envuelvan en desktop */
+    }
+}
+
+@media (max-width: 600px) {
+    /* Ajustes específicos para móviles para la tabla de pedidos */
+    .pedido-item {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+    .pedido-id, .pedido-monto, .pedido-cantidad, .pedido-fecha {
+        width: 50%;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+    .pedido-monto, .pedido-fecha {
+        text-align: right;
+    }
+}
