@@ -6,97 +6,99 @@ require_role('admin');
 $action = $_REQUEST['action'] ?? '';
 
 if ($action !== '') {
-    // Modo API -> devuelve JSON
-    header('Content-Type: application/json; charset=utf-8');
-    try {
-        if ($action === 'list_users') {
-            $stmt = $pdo->query("SELECT id, username, email, role, created_at FROM users ORDER BY created_at DESC");
-            $users = $stmt->fetchAll();
-            echo json_encode(['success' => true, 'users' => $users]);
-            exit;
-        }
-
-        if ($action === 'create_user' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = trim($_POST['username'] ?? '');
-            $email = trim($_POST['email'] ?? '');
-            $password = $_POST['password'] ?? '';
-            $role = in_array($_POST['role'] ?? 'client', ['client','admin']) ? $_POST['role'] : 'client';
-
-            if ($username === '' || $email === '' || $password === '') {
-                echo json_encode(['success' => false, 'message' => 'Completa los campos.']);
-                exit;
-            }
-
-            $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email OR username = :username LIMIT 1");
-            $stmt->execute(['email'=>$email,'username'=>$username]);
-            if ($stmt->fetch()) {
-                echo json_encode(['success' => false, 'message' => 'Usuario o email ya existe.']);
-                exit;
-            }
-
-            $hash = password_hash($password, PASSWORD_DEFAULT);
-            $ins = $pdo->prepare("INSERT INTO users (username,email,password,role) VALUES (:u,:e,:p,:r)");
-            $ins->execute(['u'=>$username,'e'=>$email,'p'=>$hash,'r'=>$role]);
-            echo json_encode(['success'=>true,'id'=>$pdo->lastInsertId()]);
-            exit;
-        }
-
-        if ($action === 'list_products') {
-            $stmt = $pdo->query("SELECT * FROM products ORDER BY created_at DESC");
-            $items = $stmt->fetchAll();
-            echo json_encode(['success'=>true,'products'=>$items]);
-            exit;
-        }
-
-        if ($action === 'create_product' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nombre = trim($_POST['nombre'] ?? '');
-            $descripcion = trim($_POST['descripcion'] ?? '');
-            $precio = floatval($_POST['precio'] ?? 0);
-            $imagen = trim($_POST['imagen'] ?? null);
-            $duracion = trim($_POST['duracion'] ?? null);
-            $fecha = trim($_POST['fecha_disponible'] ?? null);
-
-            if ($nombre === '' || $precio <= 0) {
-                echo json_encode(['success'=>false,'message'=>'Nombre y precio son requeridos (precio > 0).']);
-                exit;
-            }
-
-            $ins = $pdo->prepare("INSERT INTO products (nombre,descripcion,precio,imagen_placeholder,duracion,fecha_disponible) VALUES (:n,:d,:p,:i,:du,:f)");
-            $ins->execute(['n'=>$nombre,'d'=>$descripcion,'p'=>$precio,'i'=>$imagen,'du'=>$duracion,'f'=>$fecha]);
-            echo json_encode(['success'=>true,'id'=>$pdo->lastInsertId()]);
-            exit;
-        }
-
-        if ($action === 'list_orders') {
-            $stmt = $pdo->query("SELECT id, monto_total, cantidad_items, fecha_pedido FROM pedidos");
-            $orders = $stmt->fetchAll();
-            echo json_encode(['success'=>true,'orders'=>$orders]);
-            exit;
-        }
-
-        echo json_encode(['success'=>false,'message'=>'Acción desconocida']);
-    } catch (Exception $e) {
-        http_response_code(500);
-        echo json_encode(['success'=>false,'message'=>'Error del servidor']);
+  // Modo API -> devuelve JSON
+  header('Content-Type: application/json; charset=utf-8');
+  try {
+    if ($action === 'list_users') {
+      $stmt = $pdo->query("SELECT id, username, email, role, created_at FROM users ORDER BY created_at DESC");
+      $users = $stmt->fetchAll();
+      echo json_encode(['success' => true, 'users' => $users]);
+      exit;
     }
-    exit;
+
+    if ($action === 'create_user' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+      $username = trim($_POST['username'] ?? '');
+      $email = trim($_POST['email'] ?? '');
+      $password = $_POST['password'] ?? '';
+      $role = in_array($_POST['role'] ?? 'client', ['client', 'admin']) ? $_POST['role'] : 'client';
+
+      if ($username === '' || $email === '' || $password === '') {
+        echo json_encode(['success' => false, 'message' => 'Completa los campos.']);
+        exit;
+      }
+
+      $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email OR username = :username LIMIT 1");
+      $stmt->execute(['email' => $email, 'username' => $username]);
+      if ($stmt->fetch()) {
+        echo json_encode(['success' => false, 'message' => 'Usuario o email ya existe.']);
+        exit;
+      }
+
+      $hash = password_hash($password, PASSWORD_DEFAULT);
+      $ins = $pdo->prepare("INSERT INTO users (username,email,password,role) VALUES (:u,:e,:p,:r)");
+      $ins->execute(['u' => $username, 'e' => $email, 'p' => $hash, 'r' => $role]);
+      echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);
+      exit;
+    }
+
+    if ($action === 'list_products') {
+      $stmt = $pdo->query("SELECT * FROM products ORDER BY created_at DESC");
+      $items = $stmt->fetchAll();
+      echo json_encode(['success' => true, 'products' => $items]);
+      exit;
+    }
+
+    if ($action === 'create_product' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+      $nombre = trim($_POST['nombre'] ?? '');
+      $descripcion = trim($_POST['descripcion'] ?? '');
+      $precio = floatval($_POST['precio'] ?? 0);
+      $imagen = trim($_POST['imagen'] ?? null);
+      $duracion = trim($_POST['duracion'] ?? null);
+      $fecha = trim($_POST['fecha_disponible'] ?? null);
+
+      if ($nombre === '' || $precio <= 0) {
+        echo json_encode(['success' => false, 'message' => 'Nombre y precio son requeridos (precio > 0).']);
+        exit;
+      }
+
+      $ins = $pdo->prepare("INSERT INTO products (nombre,descripcion,precio,imagen_placeholder,duracion,fecha_disponible) VALUES (:n,:d,:p,:i,:du,:f)");
+      $ins->execute(['n' => $nombre, 'd' => $descripcion, 'p' => $precio, 'i' => $imagen, 'du' => $duracion, 'f' => $fecha]);
+      echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);
+      exit;
+    }
+
+    if ($action === 'list_orders') {
+      $stmt = $pdo->query("SELECT id, monto_total, cantidad_items, fecha_pedido FROM pedidos");
+      $orders = $stmt->fetchAll();
+      echo json_encode(['success' => true, 'orders' => $orders]);
+      exit;
+    }
+
+    echo json_encode(['success' => false, 'message' => 'Acción desconocida']);
+  } catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Error del servidor']);
+  }
+  exit;
 }
 
 // Si no hay action -> renderiza UI HTML (home con módulos)
 ?>
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Admin - Panel</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="p-4">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2>Panel de Administración</h2>
       <div>
-        <a class="btn btn-outline-secondary btn-sm" href="index.html">Sitio</a>
+        <a class="btn btn-outline-secondary btn-sm" href="./../index.html">Sitio</a>
         <a class="btn btn-outline-danger btn-sm" href="logout.php">Salir</a>
       </div>
     </div>
@@ -129,13 +131,23 @@ if ($action !== '') {
     // Helper API
     async function api(action, data = null) {
       const url = 'admin.php?action=' + encodeURIComponent(action);
-      const opts = { method: data ? 'POST' : 'GET' };
+      const opts = {
+        method: data ? 'POST' : 'GET'
+      };
       if (data) opts.body = new URLSearchParams(data);
       const res = await fetch(url, opts);
       return await res.json();
     }
 
-    function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+    function escapeHtml(s) {
+      return String(s || '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[c]);
+    }
 
     // Usuarios module
     function usersModuleHtml() {
@@ -163,18 +175,21 @@ if ($action !== '') {
 
     async function loadUsersModule() {
       container.innerHTML = usersModuleHtml();
-      document.getElementById('back-btn').addEventListener('click', () => { container.innerHTML = ''; home.style.display = 'block'; });
+      document.getElementById('back-btn').addEventListener('click', () => {
+        container.innerHTML = '';
+        home.style.display = 'block';
+      });
       document.getElementById('form-create-user').addEventListener('submit', async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
         const r = await api('create_user', data);
         const msg = document.getElementById('msg-user');
         if (r.success) {
-          msg.innerHTML = '<div class="alert alert-success">Usuario creado (ID: '+r.id+')</div>';
+          msg.innerHTML = '<div class="alert alert-success">Usuario creado (ID: ' + r.id + ')</div>';
           e.target.reset();
           loadUsersList();
         } else {
-          msg.innerHTML = '<div class="alert alert-danger">'+(r.message||'Error')+'</div>';
+          msg.innerHTML = '<div class="alert alert-danger">' + (r.message || 'Error') + '</div>';
         }
       });
       loadUsersList();
@@ -211,18 +226,21 @@ if ($action !== '') {
 
     async function loadProductsModule() {
       container.innerHTML = productsModuleHtml();
-      document.getElementById('back-btn').addEventListener('click', () => { container.innerHTML = ''; home.style.display = 'block'; });
+      document.getElementById('back-btn').addEventListener('click', () => {
+        container.innerHTML = '';
+        home.style.display = 'block';
+      });
       document.getElementById('form-create-product').addEventListener('submit', async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
         const r = await api('create_product', data);
         const msg = document.getElementById('msg-product');
         if (r.success) {
-          msg.innerHTML = '<div class="alert alert-success">Producto creado (ID: '+r.id+')</div>';
+          msg.innerHTML = '<div class="alert alert-success">Producto creado (ID: ' + r.id + ')</div>';
           e.target.reset();
           loadProductsList();
         } else {
-          msg.innerHTML = '<div class="alert alert-danger">'+(r.message||'Error')+'</div>';
+          msg.innerHTML = '<div class="alert alert-danger">' + (r.message || 'Error') + '</div>';
         }
       });
       loadProductsList();
@@ -249,7 +267,10 @@ if ($action !== '') {
 
     async function loadOrdersModule() {
       container.innerHTML = ordersModuleHtml();
-      document.getElementById('back-btn').addEventListener('click', () => { container.innerHTML = ''; home.style.display = 'block'; });
+      document.getElementById('back-btn').addEventListener('click', () => {
+        container.innerHTML = '';
+        home.style.display = 'block';
+      });
       loadOrdersList();
     }
 
@@ -262,4 +283,5 @@ if ($action !== '') {
     }
   </script>
 </body>
+
 </html>

@@ -2,104 +2,104 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viajes Full Day Venezuela | Aventuras Inolvidables</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Viajes Full Day Venezuela | Aventuras Inolvidables</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
-    <header class="main-header">
-        <div class="logo">Roloeviajes</div>
-        <nav class="main-nav">
-        </nav>
-        <div id="auth-actions" class="me-3">
-            <!-- Se completará con JS: login/register o usuario+logout -->
-            <a href="login.php" id="link-login" class="btn btn-sm btn-outline-primary">Entrar</a>
-            <a href="register.php" id="link-register" class="btn btn-sm btn-outline-secondary">Registrarse</a>
-        </div>
-        <div class="cart-icon" id="abrir-carrito">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="contador-carrito">0</span>
-        </div>
-    </header>
+	<header class="main-header">
+		<div class="logo">Roloeviajes</div>
+		<nav class="main-nav">
+		</nav>
+		<div id="auth-actions" class="me-3">
+			<!-- Se completará con JS: login/register o usuario+logout -->
+			<a href="./utilitarios/login.php" id="link-login" class="btn btn-sm btn-outline-primary">Entrar</a>
+			<a href="./utilitarios/register.php" id="link-register" class="btn btn-sm btn-outline-secondary">Registrarse</a>
+		</div>
+		<div class="cart-icon" id="abrir-carrito">
+			<i class="fas fa-shopping-cart"></i>
+			<span id="contador-carrito">0</span>
+		</div>
+	</header>
 
-    <main>
-        <section id="paquetes" class="paquetes-container p-5">
-        </section>
-    </main>
+	<main>
+		<section id="paquetes" class="paquetes-container p-5">
+		</section>
+	</main>
 
-    <aside class="carrito-panel" id="carrito-panel">
-        <button class="cerrar-carrito" id="cerrar-carrito">&times;</button>
-        <h3>🛒 Tu Reserva</h3>
-        <ul id="lista-items-carrito" class="lista-items-carrito">
-            <li class="carrito-vacio-msg">El carrito está vacío.</li>
-        </ul>
-        <div class="carrito-total">
-            <strong>Total Estimado:</strong> <span id="carrito-total-monto">$0.00</span>
-        </div>
-        <button class="btn-finalizar">Finalizar Reserva</button>
-    </aside>
+	<aside class="carrito-panel" id="carrito-panel">
+		<button class="cerrar-carrito" id="cerrar-carrito">&times;</button>
+		<h3>🛒 Tu Reserva</h3>
+		<ul id="lista-items-carrito" class="lista-items-carrito">
+			<li class="carrito-vacio-msg">El carrito está vacío.</li>
+		</ul>
+		<div class="carrito-total">
+			<strong>Total Estimado:</strong> <span id="carrito-total-monto">$0.00</span>
+		</div>
+		<button class="btn-finalizar">Finalizar Reserva</button>
+	</aside>
 
-    <div class="modal" id="modal-detalles">
-        <div class="modal-content">
-            <span class="close-button" id="cerrar-modal">&times;</span>
-            <h3 id="modal-titulo">Cargando Detalles del Tour...</h3>
-            <p id="modal-descripcion">Placeholder para la descripción completa del tour.</p>
-            <hr>
-            <p><strong>Duración:</strong> <span id="modal-duracion">Full Day (10-12 horas)</span></p>
-            <p><strong>Próxima Fecha:</strong> <span id="modal-fecha">Sábado 25 de Enero</span></p>
-            <button class="btn-reservar" id="modal-btn-reservar">Reservar este Tour</button>
-        </div>
-    </div>
+	<div class="modal" id="modal-detalles">
+		<div class="modal-content">
+			<span class="close-button" id="cerrar-modal">&times;</span>
+			<h3 id="modal-titulo">Cargando Detalles del Tour...</h3>
+			<p id="modal-descripcion">Placeholder para la descripción completa del tour.</p>
+			<hr>
+			<p><strong>Duración:</strong> <span id="modal-duracion">Full Day (10-12 horas)</span></p>
+			<p><strong>Próxima Fecha:</strong> <span id="modal-fecha">Sábado 25 de Enero</span></p>
+			<button class="btn-reservar" id="modal-btn-reservar">Reservar este Tour</button>
+		</div>
+	</div>
 
-    <section id="historial-pedidos" class="historial-pedidos">
-        <h2>Historial de Pedidos Registrados</h2>
-        <div class="pedidos-lista" id="pedidos-lista">
-            <p>Cargando pedidos...</p>
-        </div>
-    </section>
+	<section id="historial-pedidos" class="historial-pedidos">
+		<h2>Historial de Pedidos Registrados</h2>
+		<div class="pedidos-lista" id="pedidos-lista">
+			<p>Cargando pedidos...</p>
+		</div>
+	</section>
 
-    <footer class="main-footer">
-        <p>&copy; 2025 VzlaAventura. Todos los derechos reservados.</p>
-    </footer>
+	<footer class="main-footer">
+		<p>&copy; 2025 VzlaAventura. Todos los derechos reservados.</p>
+	</footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Definiciones de DOM
-            let isLoggedIn = false;
-            const listaPedidos = document.getElementById('pedidos-lista');
-            const contadorCarrito = document.getElementById('contador-carrito');
-            const listaCarrito = document.getElementById('lista-items-carrito');
-            const carritoTotalMonto = document.getElementById('carrito-total-monto');
-            const panelCarrito = document.getElementById('carrito-panel');
-            const abrirCarritoBtn = document.getElementById('abrir-carrito');
-            const cerrarCarritoBtn = document.getElementById('cerrar-carrito');
-            const modalDetalles = document.getElementById('modal-detalles');
-            const cerrarModalBtn = document.getElementById('cerrar-modal');
-            const paquetesContainer = document.getElementById('paquetes');
-            const modalBtnReservar = document.getElementById('modal-btn-reservar');
-            const btnFinalizar = document.querySelector('.btn-finalizar');
-            // Estado Global del Carrito
-            let carrito = [];
-            let toursDataCache = {};
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			// Definiciones de DOM
+			let isLoggedIn = false;
+			const listaPedidos = document.getElementById('pedidos-lista');
+			const contadorCarrito = document.getElementById('contador-carrito');
+			const listaCarrito = document.getElementById('lista-items-carrito');
+			const carritoTotalMonto = document.getElementById('carrito-total-monto');
+			const panelCarrito = document.getElementById('carrito-panel');
+			const abrirCarritoBtn = document.getElementById('abrir-carrito');
+			const cerrarCarritoBtn = document.getElementById('cerrar-carrito');
+			const modalDetalles = document.getElementById('modal-detalles');
+			const cerrarModalBtn = document.getElementById('cerrar-modal');
+			const paquetesContainer = document.getElementById('paquetes');
+			const modalBtnReservar = document.getElementById('modal-btn-reservar');
+			const btnFinalizar = document.querySelector('.btn-finalizar');
+			// Estado Global del Carrito
+			let carrito = [];
+			let toursDataCache = {};
 
-            function renderizarTours(tours) {
-                let html = '';
-                if (tours.length === 0) {
-                    paquetesContainer.innerHTML = '<h2>No hay tours disponibles en este momento.</h2>';
-                    return;
-                }
+			function renderizarTours(tours) {
+				let html = '';
+				if (tours.length === 0) {
+					paquetesContainer.innerHTML = '<h2>No hay tours disponibles en este momento.</h2>';
+					return;
+				}
 
-                // Renderiza el título de la sección
-                tours.forEach(tour => {
-                    // Guarda la data en el cache para usarla en el modal/carrito sin más peticiones
-                    toursDataCache[tour.id_tour] = tour;
+				// Renderiza el título de la sección
+				tours.forEach(tour => {
+					// Guarda la data en el cache para usarla en el modal/carrito sin más peticiones
+					toursDataCache[tour.id_tour] = tour;
 
-                    html += `
+					html += `
                 <article class="tour-card" data-tour-id="${tour.id_tour}" data-precio="${tour.precio}">
                     <img src="./images/${tour.imagen_placeholder}" alt="${tour.nombre}" class="tour-image">
                     <h3>${tour.nombre}</h3>
@@ -110,97 +110,97 @@
                     </div>
                 </article>
             `;
-                });
-                paquetesContainer.innerHTML = html;
-            }
+				});
+				paquetesContainer.innerHTML = html;
+			}
 
-            async function comprobarSesion() {
-                try {
-                    const r = await fetch('session_status.php');
-                    const js = await r.json();
-                    isLoggedIn = !!js.logged_in;
-                    const auth = document.getElementById('auth-actions');
-                    if (isLoggedIn) {
-                        auth.innerHTML = `<span class="me-2">Hola, ${js.username}</span><a href="logout.php" class="btn btn-sm btn-outline-danger">Salir</a>`;
-                    } else {
-                        auth.innerHTML = `<a href="login.php" class="btn btn-sm btn-outline-primary">Entrar</a>
-                              <a href="register.php" class="btn btn-sm btn-outline-secondary">Registrarse</a>`;
-                    }
-                } catch (e) {
-                    console.error('No se pudo comprobar sesión', e);
-                }
-            }
+			async function comprobarSesion() {
+				try {
+					const r = await fetch('session_status.php');
+					const js = await r.json();
+					isLoggedIn = !!js.logged_in;
+					const auth = document.getElementById('auth-actions');
+					if (isLoggedIn) {
+						auth.innerHTML = `<span class="me-2">Hola, ${js.username}</span><a href="./utilitarios/logout.php" class="btn btn-sm btn-outline-danger">Salir</a>`;
+					} else {
+						auth.innerHTML = `<a href="./utilitarios/login.php" class="btn btn-sm btn-outline-primary">Entrar</a>
+                              <a href="./utilitarios/register.php" class="btn btn-sm btn-outline-secondary">Registrarse</a>`;
+					}
+				} catch (e) {
+					console.error('No se pudo comprobar sesión', e);
+				}
+			}
 
-            btnFinalizar.addEventListener('click', async (e) => {
-                if (!isLoggedIn) {
-                    // redirige al login
-                    window.location.href = 'login.php';
-                    return;
-                }
-                enviarPedidoAlBackend();
-            });
+			btnFinalizar.addEventListener('click', async (e) => {
+				if (!isLoggedIn) {
+					// redirige al login
+					window.location.href = './utilitarios/login.php';
+					return;
+				}
+				enviarPedidoAlBackend();
+			});
 
-            async function comprobarSesion() {
-                try {
-                    const r = await fetch('session_status.php');
-                    const js = await r.json();
-                    isLoggedIn = !!js.logged_in;
-                    const auth = document.getElementById('auth-actions');
-                    if (isLoggedIn) {
-                        // Mostrar link a admin si role === 'admin'
-                        const adminLink = js.role === 'admin' ? `<a href="admin.php" class="btn btn-sm btn-outline-warning me-2">Admin</a>` : '';
-                        auth.innerHTML = `${adminLink}<span class="me-2">Hola, ${js.username}</span><a href="logout.php" class="btn btn-sm btn-outline-danger">Salir</a>`;
-                    } else {
-                        auth.innerHTML = `<a href="login.php" class="btn btn-sm btn-outline-primary">Entrar</a>
-                              <a href="register.php" class="btn btn-sm btn-outline-secondary">Registrarse</a>`;
-                    }
-                } catch (e) {
-                    console.error('No se pudo comprobar sesión', e);
-                }
-            }
+			async function comprobarSesion() {
+				try {
+					const r = await fetch('session_status.php');
+					const js = await r.json();
+					isLoggedIn = !!js.logged_in;
+					const auth = document.getElementById('auth-actions');
+					if (isLoggedIn) {
+						// Mostrar link a admin si role === 'admin'
+						const adminLink = js.role === 'admin' ? `<a href="./utilitarios/admin.php" class="btn btn-sm btn-outline-warning me-2">Admin</a>` : '';
+						auth.innerHTML = `${adminLink}<span class="me-2">Hola, ${js.username}</span><a href="./utilitarios/logout.php" class="btn btn-sm btn-outline-danger">Salir</a>`;
+					} else {
+						auth.innerHTML = `<a href="./utilitarios/login.php" class="btn btn-sm btn-outline-primary">Entrar</a>
+                              <a href="./utilitarios/register.php" class="btn btn-sm btn-outline-secondary">Registrarse</a>`;
+					}
+				} catch (e) {
+					console.error('No se pudo comprobar sesión', e);
+				}
+			}
 
-            function agregarAlCarrito(tourId, precio) {
-                // Usa el cache global para obtener la información completa
-                const tour = toursDataCache[tourId];
-                if (!tour) return;
+			function agregarAlCarrito(tourId, precio) {
+				// Usa el cache global para obtener la información completa
+				const tour = toursDataCache[tourId];
+				if (!tour) return;
 
-                carrito.push({
-                    id: tourId,
-                    nombre: tour.nombre,
-                    precio: parseFloat(precio)
-                });
+				carrito.push({
+					id: tourId,
+					nombre: tour.nombre,
+					precio: parseFloat(precio)
+				});
 
-                actualizarCarrito();
-                panelCarrito.classList.add('active');
-            }
+				actualizarCarrito();
+				panelCarrito.classList.add('active');
+			}
 
-            async function cargarTours() {
-                paquetesContainer.innerHTML = '<h2>Cargando nuestros tours...</h2>';
-                try {
-                    const response = await fetch('obtener_tours.php');
-                    const data = await response.json();
+			async function cargarTours() {
+				paquetesContainer.innerHTML = '<h2>Cargando nuestros tours...</h2>';
+				try {
+					const response = await fetch('./consultas/obtener_tours.php');
+					const data = await response.json();
 
-                    if (data.success && data.tours) {
-                        renderizarTours(data.tours);
-                    } else {
-                        paquetesContainer.innerHTML = `<h2>Error al cargar los tours: ${data.message}</h2>`;
-                    }
-                } catch (error) {
-                    console.error('Error de red al cargar tours:', error);
-                    paquetesContainer.innerHTML = '<h2>Fallo en la conexión. No se pudieron cargar los tours.</h2>';
-                }
-            }
+					if (data.success && data.tours) {
+						renderizarTours(data.tours);
+					} else {
+						paquetesContainer.innerHTML = `<h2>Error al cargar los tours: ${data.message}</h2>`;
+					}
+				} catch (error) {
+					console.error('Error de red al cargar tours:', error);
+					paquetesContainer.innerHTML = '<h2>Fallo en la conexión. No se pudieron cargar los tours.</h2>';
+				}
+			}
 
-            // --- Funciones del Carrito ---
-            function cargarHistorialPedidos() {
-                listaPedidos.innerHTML = '<p>Consultando pedidos en el servidor...</p>';
+			// --- Funciones del Carrito ---
+			function cargarHistorialPedidos() {
+				listaPedidos.innerHTML = '<p>Consultando pedidos en el servidor...</p>';
 
-                fetch('obtener_pedidos.php')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success && data.pedidos.length > 0) {
-                            // Inicia con la cabecera
-                            let html = `
+				fetch('./consultas/obtener_pedidos.php')
+					.then(response => response.json())
+					.then(data => {
+						if (data.success && data.pedidos.length > 0) {
+							// Inicia con la cabecera
+							let html = `
                             <div class="pedido-item pedido-header">
                                 <span class="pedido-id">ID</span>
                                 <span class="pedido-monto">Total</span>
@@ -209,14 +209,14 @@
                             </div>
                         `;
 
-                            // Itera sobre los pedidos y crea el HTML
-                            data.pedidos.forEach(pedido => {
-                                // Formato de fecha básico para mejor lectura
-                                const fecha = new Date(pedido.fecha_pedido).toLocaleDateString('es-VE', {
-                                    year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
-                                });
+							// Itera sobre los pedidos y crea el HTML
+							data.pedidos.forEach(pedido => {
+								// Formato de fecha básico para mejor lectura
+								const fecha = new Date(pedido.fecha_pedido).toLocaleDateString('es-VE', {
+									year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+								});
 
-                                html += `
+								html += `
                                 <div class="pedido-item">
                                     <span class="pedido-id">#${pedido.id_pedido}</span>
                                     <span class="pedido-monto">$${parseFloat(pedido.monto_total).toFixed(2)}</span>
@@ -224,194 +224,194 @@
                                     <span class="pedido-fecha">${fecha}</span>
                                 </div>
                             `;
-                            });
+							});
 
-                            listaPedidos.innerHTML = html;
+							listaPedidos.innerHTML = html;
 
-                        } else if (data.success && data.pedidos.length === 0) {
-                            listaPedidos.innerHTML = '<p>Aún no hay pedidos registrados.</p>';
-                        } else {
-                            listaPedidos.innerHTML = `<p style="color: red;">Error al cargar el historial: ${data.message || 'Verifique la conexión a la base de datos.'}</p>`;
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error de red al cargar pedidos:', error);
-                        listaPedidos.innerHTML = '<p style="color: red;">Fallo en la comunicación con el servidor.</p>';
-                    });
-            }
+						} else if (data.success && data.pedidos.length === 0) {
+							listaPedidos.innerHTML = '<p>Aún no hay pedidos registrados.</p>';
+						} else {
+							listaPedidos.innerHTML = `<p style="color: red;">Error al cargar el historial: ${data.message || 'Verifique la conexión a la base de datos.'}</p>`;
+						}
+					})
+					.catch(error => {
+						console.error('Error de red al cargar pedidos:', error);
+						listaPedidos.innerHTML = '<p style="color: red;">Fallo en la comunicación con el servidor.</p>';
+					});
+			}
 
-            /**
-             * @param {string} tourId - ID del tour a agregar (e.g., 'mochima').
-             * @param {number} precio - Precio del tour.
-             */
-            function agregarAlCarrito(tourId, precio) {
-                const tour = toursDataCache[tourId];
-                if (!tour) return;
+			/**
+			 * @param {string} tourId - ID del tour a agregar (e.g., 'mochima').
+			 * @param {number} precio - Precio del tour.
+			 */
+			function agregarAlCarrito(tourId, precio) {
+				const tour = toursDataCache[tourId];
+				if (!tour) return;
 
-                // Simula la adición simple de un tour
-                carrito.push({
-                    id: tourId,
-                    nombre: tour.nombre,
-                    precio: parseFloat(precio)
-                });
+				// Simula la adición simple de un tour
+				carrito.push({
+					id: tourId,
+					nombre: tour.nombre,
+					precio: parseFloat(precio)
+				});
 
-                // Actualiza la interfaz
-                actualizarCarrito();
-                panelCarrito.classList.add('active'); // Muestra el panel
-            }
+				// Actualiza la interfaz
+				actualizarCarrito();
+				panelCarrito.classList.add('active'); // Muestra el panel
+			}
 
-            /**
-             * Calcula el total, actualiza el contador y renderiza la lista de ítems.
-             */
-            function actualizarCarrito() {
-                // 1. Cálculo del Total
-                const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+			/**
+			 * Calcula el total, actualiza el contador y renderiza la lista de ítems.
+			 */
+			function actualizarCarrito() {
+				// 1. Cálculo del Total
+				const total = carrito.reduce((sum, item) => sum + item.precio, 0);
 
-                // 2. Actualización del Contador
-                contadorCarrito.textContent = carrito.length;
+				// 2. Actualización del Contador
+				contadorCarrito.textContent = carrito.length;
 
-                // 3. Renderizado de la Lista de Ítems
-                listaCarrito.innerHTML = '';
-                if (carrito.length === 0) {
-                    listaCarrito.innerHTML = '<li class="carrito-vacio-msg">El carrito está vacío.</li>';
-                } else {
-                    carrito.forEach(item => {
-                        const li = document.createElement('li');
-                        li.className = 'carrito-item';
-                        li.innerHTML = `
+				// 3. Renderizado de la Lista de Ítems
+				listaCarrito.innerHTML = '';
+				if (carrito.length === 0) {
+					listaCarrito.innerHTML = '<li class="carrito-vacio-msg">El carrito está vacío.</li>';
+				} else {
+					carrito.forEach(item => {
+						const li = document.createElement('li');
+						li.className = 'carrito-item';
+						li.innerHTML = `
                             <span>${item.nombre}</span>
                             <span>$${item.precio.toFixed(2)}</span>
                         `;
-                        listaCarrito.appendChild(li);
-                    });
-                }
+						listaCarrito.appendChild(li);
+					});
+				}
 
-                // 4. Actualización del Total
-                carritoTotalMonto.textContent = `$${total.toFixed(2)}`;
-            }
+				// 4. Actualización del Total
+				carritoTotalMonto.textContent = `$${total.toFixed(2)}`;
+			}
 
-            // --- Funciones del Modal ---
+			// --- Funciones del Modal ---
 
-            /**
-             * @param {string} tourId - ID del tour cuyos detalles se mostrarán.
-             */
-            function mostrarModal(tourId) {
-                // Usa el cache global para obtener la información completa
-                const tour = toursDataCache[tourId];
+			/**
+			 * @param {string} tourId - ID del tour cuyos detalles se mostrarán.
+			 */
+			function mostrarModal(tourId) {
+				// Usa el cache global para obtener la información completa
+				const tour = toursDataCache[tourId];
 
-                if (tour) {
-                    document.getElementById('modal-titulo').textContent = tour.nombre;
-                    document.getElementById('modal-descripcion').textContent = tour.descripcion;
-                    document.getElementById('modal-duracion').textContent = tour.duracion;
-                    document.getElementById('modal-fecha').textContent = tour.fecha_disponible;
+				if (tour) {
+					document.getElementById('modal-titulo').textContent = tour.nombre;
+					document.getElementById('modal-descripcion').textContent = tour.descripcion;
+					document.getElementById('modal-duracion').textContent = tour.duracion;
+					document.getElementById('modal-fecha').textContent = tour.fecha_disponible;
 
-                    modalBtnReservar.dataset.tourId = tourId;
-                    modalBtnReservar.dataset.precio = tour.precio;
+					modalBtnReservar.dataset.tourId = tourId;
+					modalBtnReservar.dataset.precio = tour.precio;
 
-                    modalDetalles.classList.add('active');
-                }
-            }
+					modalDetalles.classList.add('active');
+				}
+			}
 
-            function cerrarModal() {
-                modalDetalles.classList.remove('active');
-            }
+			function cerrarModal() {
+				modalDetalles.classList.remove('active');
+			}
 
-            function enviarPedidoAlBackend() {
-                if (carrito.length === 0) {
-                    alert('Tu carrito está vacío. Agrega un tour antes de finalizar la reserva.');
-                    return;
-                }
+			function enviarPedidoAlBackend() {
+				if (carrito.length === 0) {
+					alert('Tu carrito está vacío. Agrega un tour antes de finalizar la reserva.');
+					return;
+				}
 
-                // Obtener el total calculado y la CANTIDAD DE ÍTEMS
-                const total = carrito.reduce((sum, item) => sum + item.precio, 0).toFixed(2);
-                const cantidad = carrito.length; // La cantidad de ítems es la longitud del array carrito
+				// Obtener el total calculado y la CANTIDAD DE ÍTEMS
+				const total = carrito.reduce((sum, item) => sum + item.precio, 0).toFixed(2);
+				const cantidad = carrito.length; // La cantidad de ítems es la longitud del array carrito
 
-                // Preparar los datos para el envío
-                const dataToSend = new URLSearchParams();
-                dataToSend.append('total', total);
-                dataToSend.append('cantidad', cantidad); // ¡Nuevo dato a enviar!
+				// Preparar los datos para el envío
+				const dataToSend = new URLSearchParams();
+				dataToSend.append('total', total);
+				dataToSend.append('cantidad', cantidad); // ¡Nuevo dato a enviar!
 
-                // Usando Fetch API para enviar los datos
-                fetch('procesar_pedido.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    // Enviar ambos datos en el cuerpo
-                    body: dataToSend
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Éxito: Notificar e informar la cantidad
-                            alert(`¡Reserva Finalizada! El pedido #${data.id_pedido} fue registrado por $${total} USD con ${cantidad} tours. Pronto te contactaremos.`);
-                            carrito = []; // Vacía el carrito
-                            actualizarCarrito(); // Actualiza el contador y la vista
-                            panelCarrito.classList.remove('active'); // Cierra el panel
-                            cargarHistorialPedidos();
-                        } else {
-                            // Error en el servidor o data inválida
-                            alert(`Error al procesar la reserva: ${data.message}`);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error de red o del servidor:', error);
-                        alert('Ocurrió un error de conexión. Intenta de nuevo más tarde.');
-                    });
-            }
+				// Usando Fetch API para enviar los datos
+				fetch('./consultas/procesar_pedido.php', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					// Enviar ambos datos en el cuerpo
+					body: dataToSend
+				})
+					.then(response => response.json())
+					.then(data => {
+						if (data.success) {
+							// Éxito: Notificar e informar la cantidad
+							alert(`¡Reserva Finalizada! El pedido #${data.id_pedido} fue registrado por $${total} USD con ${cantidad} tours. Pronto te contactaremos.`);
+							carrito = []; // Vacía el carrito
+							actualizarCarrito(); // Actualiza el contador y la vista
+							panelCarrito.classList.remove('active'); // Cierra el panel
+							cargarHistorialPedidos();
+						} else {
+							// Error en el servidor o data inválida
+							alert(`Error al procesar la reserva: ${data.message}`);
+						}
+					})
+					.catch(error => {
+						console.error('Error de red o del servidor:', error);
+						alert('Ocurrió un error de conexión. Intenta de nuevo más tarde.');
+					});
+			}
 
-            // --- Manejo de Eventos (Event Listeners) ---
+			// --- Manejo de Eventos (Event Listeners) ---
 
-            // 1. Eventos del Carrito y Modal en la Sección Principal
-            paquetesContainer.addEventListener('click', (event) => {
-                const target = event.target;
+			// 1. Eventos del Carrito y Modal en la Sección Principal
+			paquetesContainer.addEventListener('click', (event) => {
+				const target = event.target;
 
-                if (target.classList.contains('btn-reservar')) {
-                    const tourId = target.dataset.tourId;
-                    const precio = target.dataset.precio;
-                    agregarAlCarrito(tourId, precio);
-                } else if (target.classList.contains('btn-detalles')) {
-                    const tourId = target.dataset.tourId;
-                    mostrarModal(tourId);
-                }
-            });
+				if (target.classList.contains('btn-reservar')) {
+					const tourId = target.dataset.tourId;
+					const precio = target.dataset.precio;
+					agregarAlCarrito(tourId, precio);
+				} else if (target.classList.contains('btn-detalles')) {
+					const tourId = target.dataset.tourId;
+					mostrarModal(tourId);
+				}
+			});
 
-            // 2. Eventos del Panel del Carrito (Abrir/Cerrar)
-            abrirCarritoBtn.addEventListener('click', () => {
-                panelCarrito.classList.add('active');
-            });
+			// 2. Eventos del Panel del Carrito (Abrir/Cerrar)
+			abrirCarritoBtn.addEventListener('click', () => {
+				panelCarrito.classList.add('active');
+			});
 
-            cerrarCarritoBtn.addEventListener('click', () => {
-                panelCarrito.classList.remove('active');
-            });
+			cerrarCarritoBtn.addEventListener('click', () => {
+				panelCarrito.classList.remove('active');
+			});
 
-            // 3. Eventos del Modal de Detalles (Cerrar y Reservar)
-            cerrarModalBtn.addEventListener('click', cerrarModal);
+			// 3. Eventos del Modal de Detalles (Cerrar y Reservar)
+			cerrarModalBtn.addEventListener('click', cerrarModal);
 
-            // Cierra el modal al hacer clic fuera del contenido
-            modalDetalles.addEventListener('click', (event) => {
-                if (event.target === modalDetalles) {
-                    cerrarModal();
-                }
-            });
+			// Cierra el modal al hacer clic fuera del contenido
+			modalDetalles.addEventListener('click', (event) => {
+				if (event.target === modalDetalles) {
+					cerrarModal();
+				}
+			});
 
-            // Botón de Reservar dentro del Modal
-            modalBtnReservar.addEventListener('click', (event) => {
-                const tourId = event.target.dataset.tourId;
-                const precio = event.target.dataset.precio;
-                agregarAlCarrito(tourId, precio);
-                cerrarModal(); // Cierra el modal después de agregar al carrito
-            });
+			// Botón de Reservar dentro del Modal
+			modalBtnReservar.addEventListener('click', (event) => {
+				const tourId = event.target.dataset.tourId;
+				const precio = event.target.dataset.precio;
+				agregarAlCarrito(tourId, precio);
+				cerrarModal(); // Cierra el modal después de agregar al carrito
+			});
 
-            btnFinalizar.addEventListener('click', enviarPedidoAlBackend);
+			btnFinalizar.addEventListener('click', enviarPedidoAlBackend);
 
-            // Inicialización al cargar la página
-            comprobarSesion();
-            cargarTours();
-            actualizarCarrito();
-            cargarHistorialPedidos();
-        });
-    </script>
+			// Inicialización al cargar la página
+			comprobarSesion();
+			cargarTours();
+			actualizarCarrito();
+			cargarHistorialPedidos();
+		});
+	</script>
 </body>
 
 </html>
