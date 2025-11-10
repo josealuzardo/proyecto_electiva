@@ -12,12 +12,11 @@
 </head>
 
 <body>
-	<header class="main-header">
+	<header class="main-header bd-danger">
 		<div class="logo">Roloeviajes</div>
 		<nav class="main-nav">
 		</nav>
 		<div id="auth-actions" class="me-3">
-			<!-- Se completará con JS: login/register o usuario+logout -->
 			<a href="./utilitarios/login.php" id="link-login" class="btn btn-sm btn-outline-primary">Entrar</a>
 			<a href="./utilitarios/register.php" id="link-register" class="btn btn-sm btn-outline-secondary">Registrarse</a>
 		</div>
@@ -69,7 +68,6 @@
 
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
-			// Definiciones de DOM
 			let isLoggedIn = false;
 			const listaPedidos = document.getElementById('pedidos-lista');
 			const contadorCarrito = document.getElementById('contador-carrito');
@@ -83,7 +81,6 @@
 			const paquetesContainer = document.getElementById('paquetes');
 			const modalBtnReservar = document.getElementById('modal-btn-reservar');
 			const btnFinalizar = document.querySelector('.btn-finalizar');
-			// Estado Global del Carrito
 			let carrito = [];
 			let toursDataCache = {};
 
@@ -94,9 +91,7 @@
 					return;
 				}
 
-				// Renderiza el título de la sección
 				tours.forEach(tour => {
-					// Guarda la data en el cache para usarla en el modal/carrito sin más peticiones
 					toursDataCache[tour.id_tour] = tour;
 
 					html += `
@@ -133,7 +128,6 @@
 
 			btnFinalizar.addEventListener('click', async (e) => {
 				if (!isLoggedIn) {
-					// redirige al login
 					window.location.href = './utilitarios/login.php';
 					return;
 				}
@@ -147,7 +141,6 @@
 					isLoggedIn = !!js.logged_in;
 					const auth = document.getElementById('auth-actions');
 					if (isLoggedIn) {
-						// Mostrar link a admin si role === 'admin'
 						const adminLink = js.role === 'admin' ? `<a href="./utilitarios/admin.php" class="btn btn-sm btn-outline-warning me-2">Admin</a>` : '';
 						auth.innerHTML = `${adminLink}<span class="me-2">Hola, ${js.username}</span><a href="./utilitarios/logout.php" class="btn btn-sm btn-outline-danger">Salir</a>`;
 					} else {
@@ -160,7 +153,6 @@
 			}
 
 			function agregarAlCarrito(tourId, precio) {
-				// Usa el cache global para obtener la información completa
 				const tour = toursDataCache[tourId];
 				if (!tour) return;
 
@@ -191,7 +183,6 @@
 				}
 			}
 
-			// --- Funciones del Carrito ---
 			function cargarHistorialPedidos() {
 				listaPedidos.innerHTML = '<p>Consultando pedidos en el servidor...</p>';
 
@@ -199,7 +190,6 @@
 					.then(response => response.json())
 					.then(data => {
 						if (data.success && data.pedidos.length > 0) {
-							// Inicia con la cabecera
 							let html = `
                             <div class="pedido-item pedido-header">
                                 <span class="pedido-id">ID</span>
@@ -209,9 +199,7 @@
                             </div>
                         `;
 
-							// Itera sobre los pedidos y crea el HTML
 							data.pedidos.forEach(pedido => {
-								// Formato de fecha básico para mejor lectura
 								const fecha = new Date(pedido.fecha_pedido).toLocaleDateString('es-VE', {
 									year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
 								});
@@ -240,37 +228,23 @@
 					});
 			}
 
-			/**
-			 * @param {string} tourId - ID del tour a agregar (e.g., 'mochima').
-			 * @param {number} precio - Precio del tour.
-			 */
 			function agregarAlCarrito(tourId, precio) {
 				const tour = toursDataCache[tourId];
 				if (!tour) return;
 
-				// Simula la adición simple de un tour
 				carrito.push({
 					id: tourId,
 					nombre: tour.nombre,
 					precio: parseFloat(precio)
 				});
 
-				// Actualiza la interfaz
 				actualizarCarrito();
 				panelCarrito.classList.add('active'); // Muestra el panel
 			}
 
-			/**
-			 * Calcula el total, actualiza el contador y renderiza la lista de ítems.
-			 */
 			function actualizarCarrito() {
-				// 1. Cálculo del Total
 				const total = carrito.reduce((sum, item) => sum + item.precio, 0);
-
-				// 2. Actualización del Contador
 				contadorCarrito.textContent = carrito.length;
-
-				// 3. Renderizado de la Lista de Ítems
 				listaCarrito.innerHTML = '';
 				if (carrito.length === 0) {
 					listaCarrito.innerHTML = '<li class="carrito-vacio-msg">El carrito está vacío.</li>';
@@ -286,17 +260,9 @@
 					});
 				}
 
-				// 4. Actualización del Total
 				carritoTotalMonto.textContent = `$${total.toFixed(2)}`;
 			}
-
-			// --- Funciones del Modal ---
-
-			/**
-			 * @param {string} tourId - ID del tour cuyos detalles se mostrarán.
-			 */
 			function mostrarModal(tourId) {
-				// Usa el cache global para obtener la información completa
 				const tour = toursDataCache[tourId];
 
 				if (tour) {
@@ -322,35 +288,29 @@
 					return;
 				}
 
-				// Obtener el total calculado y la CANTIDAD DE ÍTEMS
 				const total = carrito.reduce((sum, item) => sum + item.precio, 0).toFixed(2);
-				const cantidad = carrito.length; // La cantidad de ítems es la longitud del array carrito
+				const cantidad = carrito.length;
 
-				// Preparar los datos para el envío
 				const dataToSend = new URLSearchParams();
 				dataToSend.append('total', total);
-				dataToSend.append('cantidad', cantidad); // ¡Nuevo dato a enviar!
+				dataToSend.append('cantidad', cantidad);
 
-				// Usando Fetch API para enviar los datos
 				fetch('./consultas/procesar_pedido.php', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded',
 					},
-					// Enviar ambos datos en el cuerpo
 					body: dataToSend
 				})
 					.then(response => response.json())
 					.then(data => {
 						if (data.success) {
-							// Éxito: Notificar e informar la cantidad
 							alert(`¡Reserva Finalizada! El pedido #${data.id_pedido} fue registrado por $${total} USD con ${cantidad} tours. Pronto te contactaremos.`);
-							carrito = []; // Vacía el carrito
-							actualizarCarrito(); // Actualiza el contador y la vista
-							panelCarrito.classList.remove('active'); // Cierra el panel
+							carrito = [];
+							actualizarCarrito();
+							panelCarrito.classList.remove('active');
 							cargarHistorialPedidos();
 						} else {
-							// Error en el servidor o data inválida
 							alert(`Error al procesar la reserva: ${data.message}`);
 						}
 					})
@@ -359,10 +319,6 @@
 						alert('Ocurrió un error de conexión. Intenta de nuevo más tarde.');
 					});
 			}
-
-			// --- Manejo de Eventos (Event Listeners) ---
-
-			// 1. Eventos del Carrito y Modal en la Sección Principal
 			paquetesContainer.addEventListener('click', (event) => {
 				const target = event.target;
 
@@ -376,7 +332,6 @@
 				}
 			});
 
-			// 2. Eventos del Panel del Carrito (Abrir/Cerrar)
 			abrirCarritoBtn.addEventListener('click', () => {
 				panelCarrito.classList.add('active');
 			});
@@ -385,27 +340,23 @@
 				panelCarrito.classList.remove('active');
 			});
 
-			// 3. Eventos del Modal de Detalles (Cerrar y Reservar)
 			cerrarModalBtn.addEventListener('click', cerrarModal);
 
-			// Cierra el modal al hacer clic fuera del contenido
 			modalDetalles.addEventListener('click', (event) => {
 				if (event.target === modalDetalles) {
 					cerrarModal();
 				}
 			});
 
-			// Botón de Reservar dentro del Modal
 			modalBtnReservar.addEventListener('click', (event) => {
 				const tourId = event.target.dataset.tourId;
 				const precio = event.target.dataset.precio;
 				agregarAlCarrito(tourId, precio);
-				cerrarModal(); // Cierra el modal después de agregar al carrito
+				cerrarModal();
 			});
 
 			btnFinalizar.addEventListener('click', enviarPedidoAlBackend);
 
-			// Inicialización al cargar la página
 			comprobarSesion();
 			cargarTours();
 			actualizarCarrito();

@@ -6,7 +6,6 @@ require_role('admin');
 $action = $_REQUEST['action'] ?? '';
 
 if ($action !== '') {
-  // Modo API -> devuelve JSON
   header('Content-Type: application/json; charset=utf-8');
   try {
     if ($action === 'list_users') {
@@ -42,13 +41,14 @@ if ($action !== '') {
     }
 
     if ($action === 'list_products') {
-      $stmt = $pdo->query("SELECT * FROM products ORDER BY created_at DESC");
+      $stmt = $pdo->query("SELECT * FROM tours");
       $items = $stmt->fetchAll();
       echo json_encode(['success' => true, 'products' => $items]);
       exit;
     }
 
     if ($action === 'create_product' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+      $id_tour = trim($_POST['id_tour'] ?? '');
       $nombre = trim($_POST['nombre'] ?? '');
       $descripcion = trim($_POST['descripcion'] ?? '');
       $precio = floatval($_POST['precio'] ?? 0);
@@ -61,8 +61,9 @@ if ($action !== '') {
         exit;
       }
 
-      $ins = $pdo->prepare("INSERT INTO products (nombre,descripcion,precio,imagen_placeholder,duracion,fecha_disponible) VALUES (:n,:d,:p,:i,:du,:f)");
-      $ins->execute(['n' => $nombre, 'd' => $descripcion, 'p' => $precio, 'i' => $imagen, 'du' => $duracion, 'f' => $fecha]);
+      $ins = $pdo->prepare("INSERT INTO tours (id_tour, nombre, descripcion, precio, duracion, fecha_disponible, imagen_placeholder) VALUES (:it,:n,:d,:p, :du, :f, :ip)");
+      $ins->execute(['it' => $id_tour, 'n' => $nombre, 'd' => $descripcion, 'p' => $precio, 'du' => $duracion, 'f' => $fecha, 'ip' => $imagen]);
+
       echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);
       exit;
     }
@@ -82,7 +83,6 @@ if ($action !== '') {
   exit;
 }
 
-// Si no hay action -> renderiza UI HTML (home con módulos)
 ?>
 <!doctype html>
 <html>
@@ -210,6 +210,7 @@ if ($action !== '') {
           <button class="btn btn-link mb-2" id="back-btn">← Volver</button>
           <h4>Productos</h4>
           <form id="form-create-product" class="row g-2 mb-3">
+            <div class="col-md-4"><input name="id_tour" class="form-control" placeholder="Etiqueta" required></div>
             <div class="col-md-4"><input name="nombre" class="form-control" placeholder="Nombre" required></div>
             <div class="col-md-2"><input name="precio" type="number" step="0.01" class="form-control" placeholder="Precio" required></div>
             <div class="col-md-6"><input name="imagen" class="form-control" placeholder="imagen_placeholder (filename)"></div>
@@ -249,8 +250,8 @@ if ($action !== '') {
     async function loadProductsList() {
       const r = await api('list_products');
       if (r.success) {
-        const rows = r.products.map(p => `<tr><td>${p.id}</td><td>${escapeHtml(p.nombre)}</td><td>$${parseFloat(p.precio).toFixed(2)}</td><td>${escapeHtml(p.imagen_placeholder||'')}</td><td>${p.created_at}</td></tr>`).join('');
-        document.getElementById('products-list').innerHTML = `<table class="table table-sm"><thead><tr><th>ID</th><th>Nombre</th><th>Precio</th><th>Imagen</th><th>Creado</th></tr></thead><tbody>${rows}</tbody></table>`;
+        const rows = r.products.map(p => `<tr><td>${p.id_tour}</td><td>${escapeHtml(p.nombre)}</td><td>$${parseFloat(p.precio).toFixed(2)}</td><td>${escapeHtml(p.imagen_placeholder||'')}</td></tr>`).join('');
+        document.getElementById('products-list').innerHTML = `<table class="table table-sm"><thead><tr><th>ID</th><th>Nombre</th><th>Precio</th><th>Imagen</th></tr></thead><tbody>${rows}</tbody></table>`;
       }
     }
 

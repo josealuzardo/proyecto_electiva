@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-/**
- * Lanza redirección a login si no hay sesión.
- */
 function require_login()
 {
 	if (empty($_SESSION['user_id'])) {
@@ -12,9 +8,6 @@ function require_login()
 	}
 }
 
-/**
- * Requiere rol específico (p.ej. 'admin'). Si no, 403.
- */
 function require_role($role)
 {
 	if (empty($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== $role) {

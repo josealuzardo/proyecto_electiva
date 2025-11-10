@@ -1,6 +1,4 @@
 <?php
-// filepath: /home/aluzardo/code/docker/php/luzardo/config.php
-// Ajusta valores según tu entorno Docker
 $db_host = '172.17.0.2';
 $db_name = 'vzlaaventura_db';
 $db_user = 'root';

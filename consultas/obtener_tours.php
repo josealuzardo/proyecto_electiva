@@ -1,10 +1,4 @@
 <?php
-// =========================================================
-// Archivo: obtener_tours.php
-// Objetivo: Consultar y devolver la lista de tours disponibles.
-// =========================================================
-
-// --- 1. Configuración de la Base de Datos ---
 $host = '172.17.0.2';
 $db   = 'vzlaaventura_db';
 $user = 'root';
@@ -16,13 +10,11 @@ try {
 	$pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	// --- 2. Consulta a la Tabla 'tours' ---
 	$sql = "SELECT id_tour, nombre, descripcion, precio, duracion, fecha_disponible, imagen_placeholder FROM tours ORDER BY precio ASC";
 	$stmt = $pdo->query($sql);
 
 	$tours = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	// --- 3. Devolver Respuesta JSON ---
 	echo json_encode(['success' => true, 'tours' => $tours]);
 } catch (PDOException $e) {
 	http_response_code(500);

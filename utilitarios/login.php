@@ -1,5 +1,4 @@
 <?php
-// filepath: /home/aluzardo/code/docker/php/luzardo/login.php
 session_start();
 require_once 'config.php';
 

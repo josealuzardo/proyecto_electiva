@@ -1,5 +1,4 @@
 <?php
-// filepath: /home/aluzardo/code/docker/php/luzardo/register.php
 session_start();
 require_once 'config.php';
 
@@ -11,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($username === '' || $email === '' || $password === '') {
     $error = 'Complete todos los campos.';
   } else {
-    // check existing
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email OR username = :username LIMIT 1");
     $stmt->execute(['email' => $email, 'username' => $username]);
     if ($stmt->fetch()) {
