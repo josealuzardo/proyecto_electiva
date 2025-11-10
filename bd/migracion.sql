@@ -6,8 +6,10 @@ SELECT * FROM pedidos;
 CREATE TABLE pedidos (
     id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     monto_total DECIMAL(10, 2) NOT NULL,
-    cantidad_items INT NOT NULL,  -- ¡Nuevo campo!
-    fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    cantidad_items INT NOT NULL,
+    fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE tours (

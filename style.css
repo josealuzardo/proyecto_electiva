@@ -5,25 +5,38 @@
 
 /* Variables CSS para consistencia de color */
 :root {
-    --color-primario: #007bff; /* Azul vibrante (agua/cielo) */
-    --color-secundario: #28a745; /* Verde (naturaleza) */
-    --color-fondo: #f4f7f6;
-    --color-texto: #333;
-    --color-sombra: rgba(0, 0, 0, 0.1);
+	--color-primario: #1a237e; /* Azul naval oscuro */
+	--color-secundario: #00695c; /* Verde azulado oscuro */
+	--color-acento: #ffab40; /* Naranja ámbar para acentos */
+	--color-fondo: #f5f5f5; /* Gris muy claro */
+	--color-texto: #212121; /* Gris oscuro para texto */
+	--color-sombra: rgba(0, 0, 0, 0.1);
+
+	/* Override Bootstrap's default color variables */
+	--bs-primary: var(--color-primario);
+	--bs-secondary: var(--color-secundario);
+	--bs-info: #4dd0e1; /* A light blue/cyan for info */
+	--bs-success: #66bb6a; /* A light green for success */
+	--bs-warning: var(--color-acento);
+	--bs-danger: #ef5350; /* A cool red for danger */
+	--bs-light: var(--color-fondo);
+	--bs-dark: var(--color-texto);
+	--bs-body-color: var(--color-texto);
+	--bs-body-bg: var(--color-fondo);
 }
 
 /* Base Mobile-First */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--color-fondo);
-    color: var(--color-texto);
-    line-height: 1.6;
+	font-family: 'Roboto', sans-serif;
+	background-color: var(--color-fondo);
+	color: var(--color-texto);
+	line-height: 1.6;
 }
 
 /* === Estilos de Encabezado y Navegación === */
@@ -38,6 +51,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    gap: 15px; /* Added for spacing between flex items */
 }
 
 .logo {
@@ -50,371 +64,575 @@ body {
     display: none; /* Oculto en móvil */
 }
 
-.cart-icon {
+/* Removed .cart-icon styles */
+
+#abrir-carrito {
     position: relative;
-    font-size: 1.5em;
-    color: var(--color-secundario);
+    color: var(--color-secundario); /* Use secondary color for text */
     cursor: pointer;
+    padding: 5px 10px; /* Add some padding */
+    border: 1px solid var(--color-secundario); /* Add a border */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#abrir-carrito:hover {
+    background-color: var(--color-secundario);
+    color: white;
 }
 
 #contador-carrito {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: #dc3545; /* Rojo para alertar */
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.7em;
-    font-weight: bold;
-    min-width: 20px;
-    text-align: center;
+	position: absolute;
+	top: -5px;
+	right: -10px;
+	background-color: #dc3545; /* Rojo para alertar */
+	color: white;
+	border-radius: 50%;
+	padding: 2px 6px;
+	font-size: 0.7em;
+	font-weight: bold;
+	min-width: 20px;
+	text-align: center;
 }
 
 /* === Estilos de Hero/Banner === */
 
 .hero {
-    /* Nota: 'placeholder-venezuela.jpg' debe existir en tu proyecto */
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('placeholder-venezuela.jpg') no-repeat center center/cover;
-    color: white;
-    text-align: center;
-    padding: 60px 20px;
-    margin-bottom: 20px;
+	/* Nota: 'placeholder-venezuela.jpg' debe existir en tu proyecto */
+	background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+		url('') no-repeat center center/cover; /* Deja el src vacío para que el usuario ponga la imagen */
+	color: white;
+	text-align: center;
+	padding: 60px 20px;
+	margin-bottom: 20px;
+	height: 60vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .hero h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
+	font-size: 4rem;
+	margin-bottom: 10px;
+	font-weight: bold;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .btn-cta {
-    display: inline-block;
-    background-color: var(--color-secundario);
-    color: white;
-    padding: 10px 25px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 15px;
-    transition: background-color 0.3s;
+	display: inline-block;
+	background-color: var(--color-secundario);
+	color: white;
+	padding: 10px 25px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bold;
+	margin-top: 15px;
+	transition: background-color 0.3s;
 }
 
 .btn-cta:hover {
-    background-color: #1e7e34;
+	background-color: #1e7e34;
 }
 
 /* === Estilos de Paquetes Turísticos (Tarjetas) === */
 
 #paquetes h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: var(--color-primario);
+	text-align: center;
+	margin-bottom: 25px;
+	color: var(--color-primario);
 }
 
 .paquetes-container {
-    display: flex;
-    flex-direction: column; /* Apilado en móvil */
-    gap: 20px;
-    padding: 0 15px;
-    max-width: 1200px;
-    margin: 0 auto;
+	display: flex;
+	flex-direction: column; /* Apilado en móvil */
+	gap: 20px;
+	padding: 0 15px;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .tour-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px var(--color-sombra);
-    overflow: hidden;
-    transition: transform 0.3s;
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px var(--color-sombra);
+	overflow: hidden;
+	transition: transform 0.3s;
 }
 
 .tour-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+	transform: translateY(-5px);
+	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .tour-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	display: block;
 }
 
 .tour-card h3 {
-    padding: 10px 15px 5px;
-    color: var(--color-primario);
+	padding: 10px 15px 5px;
+	color: var(--color-primario);
 }
 
 .tour-precio {
-    padding: 0 15px;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #dc3545;
-    margin-bottom: 10px;
+	padding: 0 15px;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #dc3545;
+	margin-bottom: 10px;
 }
 
 .tour-actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 15px;
-    background-color: #f8f9fa;
-    border-top: 1px solid #eee;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 15px;
+	background-color: #f8f9fa;
+	border-top: 1px solid #eee;
 }
 
 /* Estilos de Botones Generales */
-.btn-reservar, .btn-detalles, .btn-finalizar {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    font-size: 0.9em;
+.btn-reservar,
+.btn-detalles,
+.btn-finalizar {
+	padding: 8px 12px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-weight: bold;
+	transition: background-color 0.3s;
+	font-size: 0.9em;
 }
 
-.btn-reservar, #modal-btn-reservar {
-    background-color: var(--color-secundario);
-    color: white;
+.btn-reservar,
+#modal-btn-reservar {
+	background-color: var(--color-secundario);
+	color: white;
 }
 
-.btn-reservar:hover, #modal-btn-reservar:hover {
-    background-color: #1e7e34;
+.btn-reservar:hover,
+#modal-btn-reservar:hover {
+	background-color: #1e7e34;
 }
 
 .btn-detalles {
-    background-color: var(--color-primario);
-    color: white;
+	background-color: var(--color-primario);
+	color: white;
 }
 
 .btn-detalles:hover {
-    background-color: #0056b3;
+	background-color: #0056b3;
 }
 
 .btn-finalizar {
-    width: 100%;
-    margin-top: 20px;
-    background-color: var(--color-primario);
-    color: white;
-    padding: 12px;
+	width: 100%;
+	margin-top: 20px;
+	background-color: var(--color-primario);
+	color: white;
+	padding: 12px;
 }
 
 /* === Panel Lateral del Carrito === */
 
 .carrito-panel {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100%;
-    background: white;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-    transform: translateX(100%); /* Oculto por defecto */
-    transition: transform 0.3s ease-in-out;
-    padding: 20px;
-    z-index: 200;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 300px;
+	height: 100%;
+	background: white;
+	box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+	transform: translateX(100%); /* Oculto por defecto */
+	transition: transform 0.3s ease-in-out;
+	padding: 20px;
+	z-index: 200;
 }
 
 .carrito-panel.active {
-    transform: translateX(0); /* Visible */
+	transform: translateX(0); /* Visible */
 }
 
 .cerrar-carrito {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 2em;
-    cursor: pointer;
-    color: #666;
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	background: none;
+	border: none;
+	font-size: 2em;
+	cursor: pointer;
+	color: #666;
 }
 
 .lista-items-carrito {
-    list-style: none;
-    padding: 10px 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
+	list-style: none;
+	padding: 10px 0;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	max-height: calc(100vh - 200px);
+	overflow-y: auto;
 }
 
 .carrito-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px dashed #eee;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0;
+	border-bottom: 1px dashed #eee;
 }
 
 .carrito-total {
-    margin-top: 15px;
-    font-size: 1.1em;
-    display: flex;
-    justify-content: space-between;
+	margin-top: 15px;
+	font-size: 1.1em;
+	display: flex;
+	justify-content: space-between;
 }
 
 /* === Modal de Detalles === */
 
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: none; /* Oculto por defecto */
-    justify-content: center;
-    align-items: center;
-    z-index: 300;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: none; /* Oculto por defecto */
+	justify-content: center;
+	align-items: center;
+	z-index: 300;
 }
 
 .modal.active {
-    display: flex;
+	display: flex;
 }
 
 .modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 500px;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	background: white;
+	padding: 30px;
+	border-radius: 8px;
+	width: 90%;
+	max-width: 500px;
+	position: relative;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #aaa;
-    cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	font-size: 1.8em;
+	font-weight: bold;
+	color: #aaa;
+	cursor: pointer;
 }
 
 /* === Estilos para la Sección de Historial de Pedidos === */
 
 .historial-pedidos {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 15px;
+	max-width: 1200px;
+	margin: 40px auto;
+	padding: 0 15px;
 }
 
 .historial-pedidos h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: var(--color-secundario);
+	text-align: center;
+	margin-bottom: 25px;
+	color: var(--color-secundario);
 }
 
 .pedidos-lista {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px var(--color-sombra);
-    overflow: hidden;
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px var(--color-sombra);
+	overflow: hidden;
 }
 
 .pedido-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-    font-size: 0.9em;
+	display: flex;
+	justify-content: space-between;
+	padding: 15px;
+	border-bottom: 1px solid #eee;
+	font-size: 0.9em;
 }
 
 .pedido-item:last-child {
-    border-bottom: none;
+	border-bottom: none;
 }
 
 .pedido-header {
-    font-weight: bold;
-    background-color: #f8f8f8;
+	font-weight: bold;
+	background-color: #f8f8f8;
 }
 
 .pedido-id {
-    width: 10%;
-    color: var(--color-primario);
+	width: 10%;
+	color: var(--color-primario);
 }
 .pedido-monto {
-    width: 25%;
-    text-align: right;
-    font-weight: bold;
-    color: #dc3545;
+	width: 25%;
+	text-align: right;
+	font-weight: bold;
+	color: #dc3545;
 }
 .pedido-cantidad {
-    width: 25%;
-    text-align: center;
+	width: 25%;
+	text-align: center;
 }
 .pedido-fecha {
-    width: 40%;
-    text-align: right;
-    color: #666;
+	width: 40%;
+	text-align: right;
+	color: #666;
 }
 
 /* === Pie de Página === */
 
 .main-footer {
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-    background-color: #333;
-    color: white;
+	text-align: center;
+	padding: 20px;
+	margin-top: 40px;
+	background-color: #333;
+	color: white;
 }
 
 /* === Media Queries para Desktop (Responsividad) === */
 
 @media (min-width: 768px) {
-    /* Estilos para Tablets y Desktop */
-    
-    .hero {
-        padding: 100px 40px;
-    }
+	/* Estilos para Tablets y Desktop */
 
-    .hero h1 {
-        font-size: 3em;
-    }
+	.hero {
+		padding: 100px 40px;
+	}
 
-    .main-nav {
-        display: flex;
-        gap: 20px;
-    }
-    
-    .main-nav a {
-        text-decoration: none;
-        color: var(--color-texto);
-        padding: 5px 10px;
-        transition: color 0.3s;
-    }
+	.hero h1 {
+		font-size: 3em;
+	}
 
-    .main-nav a:hover {
-        color: var(--color-primario);
-    }
+	.main-nav {
+		display: flex;
+		gap: 20px;
+	}
 
-    .paquetes-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 columnas en desktop */
-    }
+	.main-nav a {
+		text-decoration: none;
+		color: var(--color-texto);
+		padding: 5px 10px;
+		transition: color 0.3s;
+	}
 
-    .carrito-panel {
-        width: 350px;
-    }
+	.main-nav a:hover {
+		color: var(--color-primario);
+	}
 
-    /* Responsividad para la tabla de pedidos */
-    .pedido-item {
-        flex-wrap: nowrap; /* Evita que se envuelvan en desktop */
-    }
+	.paquetes-container {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr); /* 3 columnas en desktop */
+	}
+
+	.carrito-panel {
+		width: 350px;
+	}
+
+	/* Responsividad para la tabla de pedidos */
+	.pedido-item {
+		flex-wrap: nowrap; /* Evita que se envuelvan en desktop */
+	}
 }
 
 @media (max-width: 600px) {
-    /* Ajustes específicos para móviles para la tabla de pedidos */
-    .pedido-item {
-        flex-wrap: wrap;
-        padding: 10px;
-    }
-    .pedido-id, .pedido-monto, .pedido-cantidad, .pedido-fecha {
-        width: 50%;
-        text-align: left;
-        margin-bottom: 5px;
-    }
-    .pedido-monto, .pedido-fecha {
-        text-align: right;
-    }
+	/* Ajustes específicos para móviles para la tabla de pedidos */
+	.pedido-item {
+		flex-wrap: wrap;
+		padding: 10px;
+	}
+	.pedido-id,
+	.pedido-monto,
+	.pedido-cantidad,
+	.pedido-fecha {
+		width: 50%;
+		text-align: left;
+		margin-bottom: 5px;
+	}
+	.pedido-monto,
+	.pedido-fecha {
+		text-align: right;
+	}
+}
+
+.about-us-container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 0 15px;
+	max-width: 1200px;
+	margin: 0 auto;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.about-us-container h2 {
+	text-align: center;
+	margin-bottom: 25px;
+	color: var(--color-primario);
+}
+
+.about-us-card {
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px var(--color-sombra);
+	overflow: hidden;
+	transition: transform 0.3s;
+	padding: 1rem;
+}
+
+.why-us-container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 0 15px;
+	max-width: 1200px;
+	margin: 0 auto;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.why-us-container h2 {
+	text-align: center;
+	margin-bottom: 25px;
+	color: var(--color-primario);
+}
+
+.why-us-card {
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px var(--color-sombra);
+	overflow: hidden;
+	transition: transform 0.3s;
+	padding: 1rem;
+}
+
+/* Hover effects for main sections */
+.about-us-container,
+.why-us-container,
+.paquetes-container,
+.historial-pedidos {
+    transition: all 0.3s ease-in-out;
+}
+
+.about-us-container:hover,
+.why-us-container:hover,
+.paquetes-container:hover,
+.historial-pedidos:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; /* Larger shadow on hover */
+}
+
+/* Chatbot FAB */
+.chatbot-fab {
+    background-color: transparent;
+    color: var(--color-primario);
+    border: 1px solid var(--color-primario); /* Add a border for text button */
+    border-radius: 5px; /* Rounded corners for text button */
+    padding: 5px 10px; /* Adjusted padding for text */
+    font-size: 0.9em; /* Adjusted font size for text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease; /* Changed to all for smooth transition */
+    font-weight: bold; /* Make text bold */
+}
+
+.chatbot-fab:hover {
+    background-color: var(--color-primario); /* Background on hover */
+    color: white; /* Text color on hover */
+}
+
+/* Chatbot Modal */
+#chatbot-modal .modal-content {
+    max-width: 380px;
+    width: 90%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.chatbot-header {
+    background-color: var(--color-primario);
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.chatbot-header h3 {
+    margin: 0;
+    color: white;
+}
+
+.chatbot-body {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #e5ddd5; /* Light chat background */
+    display: flex;
+    flex-direction: column;
+}
+
+.chatbot-footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    background-color: #f8f8f8;
+}
+
+#chatbot-input {
+    flex-grow: 1;
+    border: 1px solid #ddd !important;
+    border-radius: 20px !important;
+    padding: 8px 15px !important;
+    margin-right: 10px !important;
+    font-size: 0.9em !important;
+}
+
+#chatbot-send-btn {
+    background-color: var(--color-secundario) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 20px !important;
+    padding: 8px 15px !important;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#chatbot-send-btn:hover {
+    background-color: #004d40; /* Darker shade of secondary */
+}
+
+/* Chat Message Bubbles */
+.message {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    background-color: #f0f0f0; /* Light gray for bot */
+    align-self: flex-start;
+    color: var(--color-texto);
+}
+
+.user-message {
+    background-color: var(--color-info); /* Bootstrap info color for user */
+    color: white;
+    align-self: flex-end;
 }

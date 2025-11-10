@@ -69,7 +69,7 @@ if ($action !== '') {
     }
 
     if ($action === 'list_orders') {
-      $stmt = $pdo->query("SELECT id, monto_total, cantidad_items, fecha_pedido FROM pedidos");
+      $stmt = $pdo->query("SELECT id_pedido, monto_total, cantidad_items, fecha_pedido FROM pedidos");
       $orders = $stmt->fetchAll();
       echo json_encode(['success' => true, 'orders' => $orders]);
       exit;
@@ -278,8 +278,8 @@ if ($action !== '') {
     async function loadOrdersList() {
       const r = await api('list_orders');
       if (r.success) {
-        const rows = r.orders.map(o => `<tr><td>${o.id}</td><td>${o.user_id}</td><td>${escapeHtml(o.username||'')}</td><td>$${parseFloat(o.monto_total).toFixed(2)}</td><td>${o.cantidad_items}</td><td>${o.fecha_pedido}</td><td><pre style="max-width:300px">${escapeHtml(JSON.stringify(o.detalles))}</pre></td></tr>`).join('');
-        document.getElementById('orders-list').innerHTML = `<table class="table table-sm"><thead><tr><th>ID</th><th>User ID</th><th>User</th><th>Total</th><th>#Items</th><th>Fecha</th><th>Detalles</th></tr></thead><tbody>${rows}</tbody></table>`;
+        const rows = r.orders.map(o => `<tr><td>${o.id_pedido}</td><td>$${parseFloat(o.monto_total).toFixed(2)}</td><td>${o.cantidad_items}</td><td>${o.fecha_pedido}</td><td><pre style="max-width:300px">${escapeHtml(JSON.stringify(o.detalles))}</pre></td></tr>`).join('');
+        document.getElementById('orders-list').innerHTML = `<table class="table table-sm"><thead><tr><th>ID</th><th>Total</th><th>#Items</th><th>Fecha</th><th>Detalles</th></tr></thead><tbody>${rows}</tbody></table>`;
       }
     }
   </script>
